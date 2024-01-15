@@ -22,7 +22,7 @@ export const UpVote = ({ voteCount, propositionId }: UpVoteProps) => {
       .then((res) => {
         if (res.status === 201) {
           onSuccess();
-          router.refresh();
+          location.reload();
           return;
         }
         onError();
