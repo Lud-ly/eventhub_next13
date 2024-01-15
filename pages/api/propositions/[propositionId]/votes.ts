@@ -2,6 +2,7 @@ import { Board, Proposition, Vote } from "@prisma/client";
 import { NextApiRequest, NextApiResponse } from "next";
 import { z } from "zod";
 import { prisma } from "~/src/db/prisma";
+import { getIp } from "~/src/lib/ip";
 
 type Data = {
   vote: Vote;
@@ -25,7 +26,7 @@ export default async function handler(
   const vote = await prisma?.vote.create({
     data: {
       propositionId: query.propositionId,
-      ip: String(Math.random()),
+      ip: String(getIp(req)),
     },
   });
   res.status(201).json({ vote });

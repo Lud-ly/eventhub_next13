@@ -9,7 +9,8 @@ type UpVoteProps = {
   propositionId: number;
 };
 
-const onError = () => toast.error("You can only vote once");
+const onError = () => toast.error("Vous pouvez voter seulement une fois");
+const onSuccess = () => toast.success("Merci pour votre vote");
 
 export const UpVote = ({ voteCount, propositionId }: UpVoteProps) => {
   const router = useRouter();
@@ -20,6 +21,7 @@ export const UpVote = ({ voteCount, propositionId }: UpVoteProps) => {
     })
       .then((res) => {
         if (res.status === 201) {
+          onSuccess();
           router.refresh();
           return;
         }
